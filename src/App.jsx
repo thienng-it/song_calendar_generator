@@ -178,7 +178,12 @@ function App() {
     <div className="app-container">
       <header className="main-header">
         <div className="container header-content">
-          <div style={{ position: 'absolute', top: 0, right: 0, display: 'flex', gap: '0.5rem' }}>
+          <div className="header-top-row" style={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            gap: '0.5rem',
+            marginBottom: '0.5rem'
+          }}>
             <button
               onClick={toggleTheme}
               className="lang-toggle"
@@ -201,7 +206,7 @@ function App() {
       </header>
 
       <main className="main-content container">
-        <div className="controls-panel card">
+        <div className="controls-panel card" style={{ flexWrap: 'wrap' }}>
           <div className="control-group">
             <label htmlFor="year-select">{text.liturgicalYear}:</label>
             <input
@@ -221,37 +226,45 @@ function App() {
           >
             {isGenerating ? text.generating : text.generateBtn}
           </button>
-          <button
-            className="btn"
-            style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', color: 'var(--color-text)' }}
-            onClick={handleExportCSV}
-            disabled={schedule.length === 0}
-          >
-            {text.exportBtn}
-          </button>
-          <button
-            id="share-btn"
-            className="btn"
-            style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', color: 'var(--color-text)' }}
-            onClick={handleShare}
-            disabled={schedule.length === 0}
-            title={lang === 'vi' ? "Chia sẻ liên kết" : "Share Link"}
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '4px' }}>
-              <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
-              <polyline points="16 6 12 2 8 6"></polyline>
-              <line x1="12" y1="2" x2="12" y2="15"></line>
-            </svg>
-            {lang === 'vi' ? 'Chia sẻ' : 'Share'}
-          </button>
-          <button
-            className="btn"
-            style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', color: 'var(--color-text)' }}
-            onClick={() => window.print()}
-            disabled={schedule.length === 0}
-          >
-            {text.printBtn}
-          </button>
+
+          <div className="action-buttons" style={{
+            display: 'flex',
+            gap: '0.5rem',
+            flexWrap: 'wrap',
+            justifyContent: 'center'
+          }}>
+            <button
+              className="btn"
+              style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', color: 'var(--color-text)' }}
+              onClick={handleExportCSV}
+              disabled={schedule.length === 0}
+            >
+              {text.exportBtn}
+            </button>
+            <button
+              id="share-btn"
+              className="btn"
+              style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', color: 'var(--color-text)' }}
+              onClick={handleShare}
+              disabled={schedule.length === 0}
+              title={lang === 'vi' ? "Chia sẻ liên kết" : "Share Link"}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '4px' }}>
+                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                <polyline points="16 6 12 2 8 6"></polyline>
+                <line x1="12" y1="2" x2="12" y2="15"></line>
+              </svg>
+              {lang === 'vi' ? 'Chia sẻ' : 'Share'}
+            </button>
+            <button
+              className="btn"
+              style={{ backgroundColor: 'var(--color-surface)', border: '1px solid var(--color-border)', color: 'var(--color-text)' }}
+              onClick={() => window.print()}
+              disabled={schedule.length === 0}
+            >
+              {text.printBtn}
+            </button>
+          </div>
         </div>
 
         <div className="results-area">

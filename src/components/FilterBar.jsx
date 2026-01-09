@@ -68,21 +68,28 @@ const FilterBar = ({
             borderRadius: 'var(--radius-lg)',
             border: '1px solid var(--color-border)',
             boxShadow: 'var(--shadow-sm)',
-            marginBottom: '2rem'
+            marginBottom: '1.5rem'
         }}>
             {/* Search - Takes full width on mobile, auto on desktop */}
-            <div style={{ flexGrow: 1, minWidth: '250px' }}>
+            <div style={{ flexGrow: 1, minWidth: '200px', width: '100%', maxWidth: '100%' }}>
                 <SearchBar onSearch={onSearch} placeholder={lang === 'vi' ? "Tìm bài hát, lễ, ngày..." : "Search..."} />
             </div>
 
-            {/* Filters Group */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
+            {/* Filters Group - Stack on mobile */}
+            <div style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: '0.75rem',
+                alignItems: 'center',
+                width: '100%',
+                justifyContent: 'flex-start'
+            }}>
 
                 {/* Month Selector */}
-                <div style={groupStyle}>
+                <div style={{ ...groupStyle, flex: '1 1 auto', minWidth: '140px' }}>
                     <span style={labelStyle}>{lang === 'vi' ? 'Tháng:' : 'Month:'}</span>
                     <select
-                        style={selectStyle}
+                        style={{ ...selectStyle, flex: 1, minWidth: '100px' }}
                         value={selectedMonth}
                         onChange={(e) => onMonthChange(e.target.value)}
                     >
@@ -94,10 +101,10 @@ const FilterBar = ({
                 </div>
 
                 {/* Season Selector */}
-                <div style={groupStyle}>
+                <div style={{ ...groupStyle, flex: '1 1 auto', minWidth: '140px' }}>
                     <span style={labelStyle}>{lang === 'vi' ? 'Mùa:' : 'Season:'}</span>
                     <select
-                        style={selectStyle}
+                        style={{ ...selectStyle, flex: 1, minWidth: '100px' }}
                         value={selectedSeason}
                         onChange={(e) => onSeasonChange(e.target.value)}
                     >
@@ -108,10 +115,10 @@ const FilterBar = ({
                 </div>
 
                 {/* Day Selector */}
-                <div style={groupStyle}>
+                <div style={{ ...groupStyle, flex: '1 1 auto', minWidth: '130px' }}>
                     <span style={labelStyle}>{lang === 'vi' ? 'Thứ:' : 'Day:'}</span>
                     <select
-                        style={selectStyle}
+                        style={{ ...selectStyle, flex: 1, minWidth: '90px' }}
                         value={selectedDay}
                         onChange={(e) => onDayChange(e.target.value)}
                     >
