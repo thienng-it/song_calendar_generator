@@ -1,0 +1,423 @@
+:root {
+  /* Premium Color Palette - HSL */
+  --color-primary: 217 91% 50%;
+  /* Vibrant Blue */
+  --color-primary-dark: 217 91% 40%;
+  --color-secondary: 262 83% 58%;
+  /* Purple accent */
+  --color-background: 220 20% 97%;
+  /* Light gray-blue bg */
+  --color-surface: 0 0% 100%;
+  --color-text: 215 28% 17%;
+  --color-text-muted: 215 16% 47%;
+  --color-border: 220 13% 91%;
+
+  /* Status Colors */
+  --color-success: 142 71% 45%;
+  --color-warning: 32 95% 44%;
+  --color-error: 339 90% 51%;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+
+  /* Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-glow: 0 0 15px hsla(var(--color-primary), 0.3);
+
+  /* Typography */
+  --font-sans: 'Times New Roman', Times, serif;
+  --gradient-start: 210 80% 96%;
+  --gradient-end: 260 60% 96%;
+}
+
+/* Dark Mode - Auto (OS pref) or Manual */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: 222 47% 11%;
+    --color-surface: 217 33% 17%;
+    --color-text: 210 40% 98%;
+    --color-text-muted: 215 20% 65%;
+    --color-border: 217 33% 25%;
+    --color-primary: 217 91% 65%;
+    --gradient-start: 222 47% 11%;
+    --gradient-end: 217 33% 15%;
+  }
+}
+
+[data-theme="dark"] {
+  --color-background: 222 47% 11%;
+  --color-surface: 217 33% 17%;
+  --color-text: 210 40% 98%;
+  --color-text-muted: 215 20% 65%;
+  --color-border: 217 33% 25%;
+  --color-primary: 217 91% 65%;
+  --gradient-start: 222 47% 11%;
+  --gradient-end: 217 33% 15%;
+}
+
+/* Light Mode - Forced */
+[data-theme="light"] {
+  --color-primary: 217 91% 50%;
+  --color-primary-dark: 217 91% 40%;
+  --color-secondary: 262 83% 58%;
+  --color-background: 220 20% 97%;
+  --color-surface: 0 0% 100%;
+  --color-text: 215 28% 17%;
+  --color-text-muted: 215 16% 47%;
+  --color-border: 220 13% 91%;
+  --gradient-start: 210 80% 96%;
+  --gradient-end: 260 60% 96%;
+}
+
+/* Soft Mode - Sepia/Eye Care */
+[data-theme="soft"] {
+  --color-primary: 200 40% 40%;
+  /* Muted Teal/Blue */
+  --color-primary-dark: 200 40% 30%;
+  --color-secondary: 30 50% 50%;
+  /* Warm Brown/Orange */
+  --color-background: 47 50% 94%;
+  /* Cream/Beige */
+  --color-surface: 47 50% 98%;
+  /* Lighter Cream */
+  --color-text: 30 10% 20%;
+  /* Dark Warm Gray */
+  --color-text-muted: 30 10% 50%;
+  --color-border: 47 30% 85%;
+  --gradient-start: 47 50% 94%;
+  --gradient-end: 40 40% 90%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: linear-gradient(135deg, hsl(var(--gradient-start)) 0%, hsl(var(--gradient-end)) 100%);
+  background-attachment: fixed;
+  color: hsl(var(--color-text));
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Utilities */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-md);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+  font-size: 0.95rem;
+}
+
+.btn-primary {
+  background-color: hsl(var(--color-primary));
+  color: white;
+  box-shadow: var(--shadow-md);
+}
+
+.btn-primary:hover {
+  background-color: hsl(var(--color-primary-dark));
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-1px);
+}
+
+.card {
+  background-color: hsl(var(--color-surface) / 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: var(--shadow-sm);
+  padding: var(--spacing-lg);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+
+/* App Component Styles */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-header {
+  background-color: hsl(var(--color-surface));
+  border-bottom: 1px solid hsl(var(--color-border));
+  padding: var(--spacing-lg) 0;
+  margin-bottom: var(--spacing-xl);
+}
+
+.header-content {
+  text-align: center;
+  position: relative;
+  /* Context for absolute positioning */
+}
+
+.lang-toggle {
+  /* Removed absolute positioning to allow flex layout */
+  background: transparent;
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+  font-size: 0.8rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 600;
+}
+
+.lang-toggle:hover {
+  background: var(--color-primary);
+  color: white;
+  transform: translateY(-1px);
+}
+
+.logo {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: hsl(var(--color-primary));
+  letter-spacing: -0.05em;
+  margin-bottom: var(--spacing-xs);
+}
+
+.subtitle {
+  color: hsl(var(--color-text-muted));
+  font-size: 1.1rem;
+}
+
+.controls-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-xl);
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.control-group label {
+  font-weight: 600;
+}
+
+.control-group input {
+  padding: var(--spacing-sm);
+  border: 1px solid hsl(var(--color-border));
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  width: 100px;
+  text-align: center;
+}
+
+.generate-btn {
+  font-size: 1.1rem;
+  padding: var(--spacing-sm) var(--spacing-xl);
+}
+
+/* Schedule View Styles */
+.month-block {
+  margin-bottom: var(--spacing-xl);
+}
+
+.month-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  text-align: center;
+  text-transform: capitalize;
+  letter-spacing: -0.02em;
+  margin: var(--spacing-xl) 0;
+  padding-bottom: var(--spacing-md);
+  position: relative;
+
+  /* Gradient Text */
+  background: linear-gradient(135deg, hsl(var(--color-primary)), hsl(var(--color-secondary)));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: hsl(var(--color-primary));
+  /* Fallback */
+}
+
+.month-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, hsl(var(--color-primary)), hsl(var(--color-secondary)));
+  border-radius: var(--radius-xl);
+}
+
+.days-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--spacing-xl);
+}
+
+.day-card {
+  display: flex;
+  flex-direction: column;
+  /* Remove gap here to handle spacing via header margin */
+  height: 100%;
+}
+
+.day-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.songs-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  flex-grow: 1;
+}
+
+.day-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.day-date {
+  font-size: 0.9rem;
+  color: hsl(var(--color-text-muted));
+}
+
+.season-badge {
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.songs-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.song-item {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-sm);
+  font-size: 1.05rem;
+}
+
+.song-label {
+  font-weight: 700;
+  color: hsl(var(--color-primary));
+  width: 30px;
+  flex-shrink: 0;
+}
+
+.song-name {
+  color: hsl(var(--color-text));
+  flex-grow: 1;
+  /* Allow name to take space */
+}
+
+.regenerate-btn-small {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: hsl(var(--color-text-muted));
+  opacity: 0;
+  /* Hidden by default */
+  transition: opacity 0.2s, color 0.2s;
+  padding: 4px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.song-item:hover .regenerate-btn-small {
+  opacity: 1;
+  /* Show on hover */
+}
+
+.regenerate-btn-small:hover {
+  color: hsl(var(--color-primary));
+  background-color: hsla(var(--color-primary), 0.1);
+}
+
+.empty-state {
+  text-align: center;
+  padding: var(--spacing-xl);
+  color: hsl(var(--color-text-muted));
+  font-style: italic;
+}
+
+
+@media print {
+
+  .main-header,
+  .controls-panel,
+  .main-footer {
+    display: none;
+  }
+
+  .app-container {
+    height: auto;
+    display: block;
+  }
+
+  .month-block {
+    break-inside: avoid;
+  }
+
+  .card {
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+}
+
+.main-footer {
+  margin-top: auto;
+  padding: var(--spacing-md);
+  text-align: center;
+  color: hsl(var(--color-text-muted));
+  font-size: 0.9rem;
+  border-top: 1px solid hsl(var(--color-border));
+}
