@@ -1,16 +1,63 @@
-# React + Vite
+# Catholic Mass Song Generator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern React application designed to automate the generation of song schedules for Catholic mass, ensuring compliance with the Liturgical calendar and enhancing the planning process for choirs and music directors.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Automated Scheduling**:  Automatically generates song lists for the four key parts of the mass:
+    - **Ca Nhập Lễ** (Entrance)
+    - **Ca Tiến Lễ** (Offertory)
+    - **Ca Hiệp Lễ** (Communion)
+    - **Ca Kết Lễ** (Recessional)
+- **Liturgical Season Awareness**: Adapts song selection based on the current liturgical season (Advent, Christmas, Lent, Easter, Ordinary Time).
+- **Laudato SI Integration**: Fully integrated with the "TuyenTapThanhCa Laudato SI" song collection.
+- **Shareable Schedules**: Generate deterministic, unique URLs for any generated schedule, allowing for easy sharing among choir members.
+- **Modern Glassmorphism UI**: Features a beautiful, responsive interface designed with modern aesthetics and readability in mind.
+- **Export Capabilities**: 
+    - Export schedules to CSV for easy printing or editing.
+    - Copy schedules directly to the clipboard.
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Frontend Framework**: React 19
+- **Build Tool**: Vite
+- **Styling**: Vanilla CSS (Custom Glassmorphism Design System)
+- **Language**: JavaScript (ES Modules)
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Prerequisites
+
+- Node.js (v18 or higher)
+- npm (v9 or higher)
+
+### Installation
+
+1.  Clone the repository:
+    ```bash
+    git clone <repository-url>
+    cd songs_generator
+    ```
+
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
+
+3.  Start the development server:
+    ```bash
+    npm run dev
+    ```
+
+4.  Open your browser and navigate to `http://localhost:5173` (or the port shown in your terminal).
+
+## Usage
+
+1.  **Generate a Schedule**: The app will automatically generate a schedule based on the current settings.
+2.  **Customize**: Click the "Regenerate" button next to any song to swap it with another suitable option from the database.
+3.  **Share**: Click the "Share" button to copy a unique link to your current schedule configuration.
+4.  **Export**: Use the "Export to CSV" button to download the schedule.
+
+## License
+
+This project is for personal and community use.
