@@ -131,11 +131,83 @@ export const getDayInfo = (date) => {
         notes.push(fixedFeast.name);
     }
 
-    // Rule 3: Easter Octave (Monday to Saturday after Easter)
-    // Need Easter Date again here or pass it. 
-    // Optimization: We re-calc easter in getLiturgicalSeason, might be inefficient but robust.
+    // Variable Feasts Based on Easter
     const year = date.getFullYear();
     const easter = getEasterDate(year);
+
+    // Calculate Variable Dates
+    const palmSunday = new Date(easter);
+    palmSunday.setDate(easter.getDate() - 7);
+
+    const holyThursday = new Date(easter);
+    holyThursday.setDate(easter.getDate() - 3);
+
+    const goodFriday = new Date(easter);
+    goodFriday.setDate(easter.getDate() - 2);
+
+    // Vietnamese standard: Ascension is 7th Sunday of Easter (42 days after Easter)
+    const ascension = new Date(easter);
+    ascension.setDate(easter.getDate() + 42);
+
+    const pentecost = new Date(easter);
+    pentecost.setDate(easter.getDate() + 49);
+
+    const holyTrinity = new Date(easter);
+    holyTrinity.setDate(easter.getDate() + 56);
+
+    // Vietnamese standard: Corpus Christi is Sunday after Trinity Sunday (63 days after Easter)
+    const corpusChristi = new Date(easter);
+    corpusChristi.setDate(easter.getDate() + 63);
+
+    // Sacred Heart is Friday after 2nd Sunday after Pentecost (68 days after Easter)
+    const sacredHeart = new Date(easter);
+    sacredHeart.setDate(easter.getDate() + 68);
+
+    // Christ the King is the Sunday before the 1st Sunday of Advent
+    const christmasDayOfWeek = new Date(year, 11, 25).getDay();
+    const christTheKing = new Date(year, 11, 25);
+    christTheKing.setDate(christTheKing.getDate() - christmasDayOfWeek - 28); // 4 Sundays before Xmas, minus 7 days
+
+    // Check Variable Feasts Matches
+    const checkDateMatches = (d1, d2) => {
+        return d1.getFullYear() === d2.getFullYear() &&
+            d1.getMonth() === d2.getMonth() &&
+            d1.getDate() === d2.getDate();
+    }
+
+    if (checkDateMatches(date, palmSunday)) {
+        notes.push("Lễ Lá");
+        hasGloria = false;
+    } else if (checkDateMatches(date, holyThursday)) {
+        notes.push("Thứ Năm Tuần Thánh (Thánh Lễ Tiệc Ly)");
+        hasGloria = true;
+    } else if (checkDateMatches(date, goodFriday)) {
+        notes.push("Thứ Sáu Tuần Thánh (Tưởng Niệm Cuộc Thương Khó)");
+        hasGloria = false;
+    } else if (checkDateMatches(date, easter)) {
+        notes.push("Đại Lễ Phục Sinh (Lễ Trọng)");
+        hasGloria = true;
+    } else if (checkDateMatches(date, ascension)) {
+        notes.push("Chúa Lên Trời (Lễ Trọng)");
+        hasGloria = true;
+    } else if (checkDateMatches(date, pentecost)) {
+        notes.push("Chúa Thánh Thần Hiện Xuống (Lễ Trọng)");
+        hasGloria = true;
+    } else if (checkDateMatches(date, holyTrinity)) {
+        notes.push("Chúa Ba Ngôi (Lễ Trọng)");
+        hasGloria = true;
+    } else if (checkDateMatches(date, corpusChristi)) {
+        notes.push("Mình Máu Thánh Chúa (Lễ Trọng)");
+        hasGloria = true;
+    } else if (checkDateMatches(date, sacredHeart)) {
+        notes.push("Thánh Tâm Chúa Giêsu (Lễ Trọng)");
+        hasGloria = true;
+    } else if (checkDateMatches(date, christTheKing)) {
+        notes.push("Chúa Giêsu Vua (Lễ Trọng)");
+        hasGloria = true;
+    }
+
+    // Rule 3: Easter Octave (Monday to Saturday after Easter)
     const octaveEnd = new Date(easter);
     octaveEnd.setDate(easter.getDate() + 7); // Until Divine Mercy Sunday
 
@@ -162,7 +234,7 @@ export const getDayInfo = (date) => {
         isSunday: dayOfWeek === 0,
         validForSchedule: dayOfWeek !== 0,
         hasGloria: hasGloria,
-        isFeast: !!fixedFeast,
+        isFeast: !!fixedFeast || notes.length > 0,
         notes: notes
     };
 };

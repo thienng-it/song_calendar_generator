@@ -25,10 +25,9 @@ export const generateSchedule = (year, seed = Date.now()) => {
         const currentDate = new Date(d); // Copy date
         const dayInfo = getDayInfo(currentDate);
 
-        // Skip Sundays as requested ("Sunday is not included")
-        if (!dayInfo.validForSchedule) {
-            continue;
-        }
+        // Removed skipping Sundays
+
+
 
         // Select Songs
         const songs = selectSongsForDay(dayInfo, rng);
